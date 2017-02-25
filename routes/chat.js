@@ -33,7 +33,7 @@ module.exports = function(app, connection) {
 		}
 	});
 	
-	app.post("conversacion", function(res, req) {
+	app.post("/conversacion", function(res, req) {
 		var id_transportista = req.body.id_transportista;
 		var id_pasajero = req.body.id_pasajero;
 		var query = "SELECT * FROM `chat` WHERE id_transportista=";
