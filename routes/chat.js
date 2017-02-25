@@ -30,6 +30,15 @@ module.exports = function(app, connection) {
 				}
 				return res.send(result);
 			});
+		} else {
+			var q = "SELECT id_transportista FROM `chat` WHERE id_pasajero = " + connection.escape(id);
+			console.log(q);
+			connection.query(q, function(error, result) {
+				if (error) {
+					return console.log(error);	
+				}
+				return res.send(result);
+			});
 		}
 	});
 	
