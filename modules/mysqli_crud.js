@@ -22,7 +22,7 @@
 	}
 
 function all(con, db) {
-	connection.query("SELECT * from "+db+" WHERE 1", function(error, rows, fields) {
+	con.query("SELECT * from "+db+" WHERE 1", function(error, rows, fields) {
 		if (error) {
 			return error;
 		} else {
