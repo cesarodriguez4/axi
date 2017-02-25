@@ -1,0 +1,11 @@
+doctype html
+head
+	link(rel="stylesheet" href="/stylesheets/chat.css")
+	script(src="https://cdn.socket.io/socket.io-1.4.5.js")
+	script(src="/javascripts/chat.js")
+body
+	.send
+		p Escribe el mensaje:
+		input(id="mensaje" type="text")
+		button(onclick="sendMessage()") Enviar mensaje
+	.messages

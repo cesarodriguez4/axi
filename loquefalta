@@ -1,0 +1,34 @@
+Login. * -- listo
+ Registro también "Update". * -- listo 
+  get y set posición del usuario "Pasajero y transportista". * --listo
+ Tarifas. * --listo
+  get y set de historial de pagos. * --listo
+   Registro de SOS. *listo
+   Solicitud de Taxistas " * listo
+
+   
+   Listado de Taxistas dependiendo las opciones seleccionadas". -> duro
+   get y set de Viajes realizados. -> No esta en tablas
+   Registro de notificaciones. -> duro
+      registro de chat. -> duro
+
+ 9 de Enero
+ Sistema de pedir taxis
+ lista de pagos hechos por un pasajero
+ enviar calificacion
+ monto de un servicio
+ lista de carreras
+ historial
+ validacion de que el email no se repita
+ subida de documentos - preguntar como se manejara
+
+ 28 de Enero
+ Subida de Documentos
+
+ 31-Enero 
+ Sockets de solicitud instantanea
+ 
+ 22-Feb
+ Agregar historial al chat
+ Sistema para dar de baja al usuario *
+

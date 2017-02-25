@@ -1,0 +1,56 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+		link(rel="stylesheet", href="/stylesheets/sockets.css")
+		script(src="https://cdn.socket.io/socket.io-1.4.5.js")
+		title Websockets
+		//script(src="/bower_components/socket.io-client/dist/socket.io.js")
+		//color #C75690
+	body
+		.container
+			.row
+				div(class="col-xs-12 text-center lead")
+					p Tabla de eventos de sockets (Cloud9)
+					p Abra la consola para ver las respuestas del servidor
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="solicitud()") Enviar Solicitud de Cliente (Lista de solicitudes)
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="aceptar()") Aceptar Solicitud (Lista de solicitudes)
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="instant()") Enviar Solicitud instantanea
+				form(class="col-md-5 mt-2 text-center")
+					fieldset
+						legend Datos de ubicacion instantanea
+						.row(class="form-group")
+							span id_usuario:
+							input(type="text" id="id_usuario")
+						.row(class="form-group")
+							span lon:
+							input(type="text" id="lon")
+						.row(class="form-group")
+							span lat:
+							input(type="text" id="lat")
+						.row(class="form-group")
+							span origen:
+							input(type="text" id="origen")
+						.row(class="form-group")
+							span destino:
+							input(type="text" id="destino")
+
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="cancel()") Solicitud cancelada
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="iniciar_viaje()") Iniciar - viaje
+
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="culminar_viaje()") Culminar Viaje
+
+
+		script(src="/javascripts/socketsEvents.js")
