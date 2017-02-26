@@ -142,7 +142,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 						console.log('remedio');
 						console.log(res_pasajero);
 						//res_pasajero = JSON.stringify(res_pasajero);
-						socket.emit("info-ondemand", res_pasajero);
+						socket.broadcast.emit("info-ondemand", res_pasajero);
 					}
 				});
 				
