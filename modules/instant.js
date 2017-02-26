@@ -128,6 +128,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 						console.log(error);
 					} else {
 						var res_pasajero = {
+							id_transportista: menorId,
 							id_pasajero: id, 
 							fullname: rows[0].nombre + ' ' + rows[0].apellido, 
 							reputacion: rows[0].reputacion, 
