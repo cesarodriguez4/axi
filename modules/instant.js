@@ -59,8 +59,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 					menor = 1e10
 				}
 				//Para todo el resto de las ubicaciones ...
-				for (i=1; i<rows.length; i++) {
-					item = minorD(lat, rows[i].lat, lon, rows[i].lon);
+				for (var i=1; i<rows.length; i++) {
+					var item = minorD(lat, rows[i].lat, lon, rows[i].lon);
 					console.log('itero con el item', item);
 					if (item < menor) {
 						console.log('en loop, item', item);
@@ -161,7 +161,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 function sort(array) {
 	var i;
 	var key;
-	for (j=1; j<array.length; j++) {
+	for (var j=1; j<array.length; j++) {
 		i=j-1;
 		key = array[j];
 		while (i>=0 && array[i] > key) {
@@ -177,7 +177,7 @@ function sort(array) {
  function sortObj(array) {
 	var i;
 	var key;
-	for (j=1; j<array.length; j++) {
+	for (var j=1; j<array.length; j++) {
 		i=j-1;
 		key = array[j];
 		while (i>=0 && array[i].distancia > key.distancia) {
@@ -212,7 +212,7 @@ function lista(res,con, table, id, lon, lat) {
 
 		var size = result.length;
 		var posiciones = [];
-		for (i=0; i<size; i++) {
+		for (var i=0; i<size; i++) {
 			var minDistance = minorD(lat, result[i].lat , lon, result[i].lon);
 			if(!isNaN(minDistance) && minDistance < 30000) {
 				posiciones.push({
