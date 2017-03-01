@@ -7,7 +7,17 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-module.exports = function(app, con) {
+function iUser(con, object, tipo) {
+		var table;
+	if (tipo == 1) {
+		table = 'transportistas'
+	} else {
+		table = 'persona'
+	}
+	queries.insert(con, object, table);
+}
+
+	module.exports = function(app, con) {
 		
 		app.post('/usuarios/nuevo', function(req, res) {
 
@@ -22,207 +32,211 @@ module.exports = function(app, con) {
 		console.log(req.body);
 		if (req.body !== undefined) {
 			
-			nombre = req.body.nombre;
-			apellido = req.body.apellido;
-			email = req.body.email;
-			password = req.body.password;
-			telefono = req.body.telefono;
-			id_tipo = req.body.id_tipo;
+		nombre = req.body.nombre;
+		apellido = req.body.apellido;
+		email = req.body.email;
+		password = req.body.password;
+		telefono = req.body.telefono;
+		id_tipo = req.body.id_tipo;
 
-			function iUser(con, object, tipo) {
-					if (tipo == 1) {
-						table = 'transportistas'
-					} else {
-						table = 'persona'
-					}
-					queries.insert(con, object, table);
-				}
+		if(req.body.foto) {
+			var foto = req.body.foto;
+			var bitmap = new Buffer(foto, 'base64');
+			var fileName = Date.now();
+	   		var foto_perfil = fileName + ".jpg";
 
-
-
-
-			if(req.body.foto) {
-				var foto = req.body.foto;
-				var bitmap = new Buffer(foto, 'base64');
-				var fileName = Date.now();
-		   		var foto_perfil = fileName + ".jpg";
-
-
-
-		   		//Preparando datos adicionales
-
-		   		if (id_tipo == 1) {
-
-		   			dni = req.body.dni;
-		   			estado = req.body.estado;
-		   			ciudad = req.body.ciudad;
-		   			year_vehiculo = req.body.year_vehiculo;
-		   			marca_vehiculo = req.body.marca_vehiculo;
-		   			modelo_vehiculo = req.body.modelo_vehiculo;
-		   			placa_vehiculo = req.body.placa_vehiculo;
-
-		   			var objTrans = {
-		   				id,
+			fs.writeFile("public/images/"+fileName+".jpg", bitmap, function(error, success) {
+				if (error) {
+					console.log(error);
+					var object = {
+						id,
 						nombre, 
 						apellido,
 						email,
 						password, 
 						telefono, 
-						foto_perfil,
-						dni, 
-						estado, 
-						ciudad, 
-						year_vehiculo, 
-						marca_vehiculo, 
-						modelo_vehiculo, 
-						placa_vehiculo
-					}
-		   		}
-				
-				fs.writeFile("public/images/"+fileName+".jpg", bitmap, function(error, success) {
-					if (error) {
-						console.log(error);
-						var object = {
+						foto_perfil: error, 
+						id_tipo
+					};
+					queries.insertWRes(res, con , object,'usuarios');
+					res.json({error: true});
+				} else {
+			        cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
+			           var foto_perfil = result.url;
+			            console.log(result);
+				            var object = {
+				            id,
+							nombre, 
+							apellido,
+							email,
+							password, 
+							telefono, 
+							foto_perfil, 
+							id_tipo
+						}
+						
+						//Informacion del transportista
+						dni = req.body.dni;
+			   			estado = req.body.estado;
+			   			ciudad = req.body.ciudad;
+			   			year_vehiculo = req.body.year_vehiculo;
+			   			marca_vehiculo = req.body.marca_vehiculo;
+			   			modelo_vehiculo = req.body.modelo_vehiculo;
+			   			placa_vehiculo = req.body.placa_vehiculo;
+		
+			   			var objTrans = {
+			   				id,
+							nombre, 
+							apellido,
+							email,
+							password, 
+							telefono, 
+							foto_perfil,
+							dni, 
+							estado, 
+							ciudad, 
+							year_vehiculo, 
+							marca_vehiculo, 
+							modelo_vehiculo, 
+							placa_vehiculo
+						}
+
+						if (id_tipo ==1) {
+							iUser(con, objTrans, 1)
+						}
+						queries.insertWRes(res, con , object,'usuarios');
+          
+ 					});
+				}
+			});
+			res.json("ok");
+		} else {
+			var object = {
 							id,
 							nombre, 
 							apellido,
 							email,
 							password, 
 							telefono, 
-							foto_perfil: error, 
 							id_tipo
 						}
-						queries.insertWRes(res, con , object,'usuarios');
-						if (id_tipo ==1) {
-							iUser(con, objTrans, 1)
-						}
-					} else {
-				        cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
-				           var foto_perfil = result.url;
-				            console.log(result);
-					            var object = {
-					            id,
-								nombre, 
-								apellido,
-								email,
-								password, 
-								telefono, 
-								foto_perfil, 
-								id_tipo
-							}
-
-							if (id_tipo ==1) {
-								iUser(con, objTrans, 1)
-							}
-
-							queries.insertWRes(res, con , object,'usuarios');
-	          
-	 					});
-					}
-				});
-				res.json("ok");
-			} else {
-				var object = {
-								id,
-								nombre, 
-								apellido,
-								email,
-								password, 
-								telefono, 
-								id_tipo
-							}
-				
-				queries.insertWRes(res, con , object,'usuarios');
-				if (id_tipo ==1) {
-					iUser(con, objTrans, 1)
-				}
-			}
-		} else {
-			res.send("No data given");
-		}
-
-		}); 
-
-		app.get('/usuarios/login/:username/:password', function(req, res){
-		console.log('Entro')
-			var username = req.params.username;
-			var password = req.params.password;	
-			var query = "SELECT * FROM `usuario` WHERE `usuario` = '"+ username + "' AND `password` = '"+ password + "'";
-			console.log(query);
-			con.query(query, function(error, rows) {
-				if(error) {
-					res.send(error);
-				} else {
-					var id = rows[0];
-					console.log('id');
-					console.log(id);
-					if (id !== undefined) {
-						console.log('entro a la zona');
-						if (id.id_tipo === 1) {
-						//Es transportista
-						console.log("Para no tomar");
-						let query = "SELECT * FROM `transportista` WHERE `id_transportista` = '"+ id.id_tr + "';"
-						console.log(query);
-						con.query(query, function(error, rows) {
-							if (error) {
-								res.send(error);
-							} else {
-								res.send(rows);
-							}
-
-						});
-					} else {
-						// No es transportista
-						//Es transportista
-						let query = "SELECT FROM * `usuario` WHERE id_persona = '"+ id.id_persona + "';"
-						console.log(query);
-						con.query(query, function(error, rows) {
-							if (error) {
-								res.send(error);
-							} else {
-								res.send(rows);
-							}
-
-						});
-					}
-					} else {
-						res.json({success: false, message: "Auth wrong"});
-					}
-
-				}
-			});
-		});
+			
+			queries.insertWRes(res, con , object,'usuarios');
+			if (id_tipo == 1) {
+				//Informacion del transportista
+						dni = req.body.dni;
+			   			estado = req.body.estado;
+			   			ciudad = req.body.ciudad;
+			   			year_vehiculo = req.body.year_vehiculo;
+			   			marca_vehiculo = req.body.marca_vehiculo;
+			   			modelo_vehiculo = req.body.modelo_vehiculo;
+			   			placa_vehiculo = req.body.placa_vehiculo;
 		
-		app.post('/usuarios/login', function(req, res) {
-			var email = req.body.email;
-			var password = req.body.password;	
-			var query = "SELECT * FROM `usuarios` WHERE `email` = "+ con.escape(email) + " AND `password` = "+ con.escape(password);
-			con.query(query, function(error, rows) {
-				if(error) {
-					res.send(error);
-				} else {
-					if (rows.length == 0) {
-						res.send(false);
-					} else {
-						res.send(rows);
-					}
-					}
-				});
-			});
+			   			var objTrans = {
+			   				id,
+							nombre, 
+							apellido,
+							email,
+							password, 
+							telefono, 
+							foto_perfil,
+							dni, 
+							estado, 
+							ciudad, 
+							year_vehiculo, 
+							marca_vehiculo, 
+							modelo_vehiculo, 
+							placa_vehiculo
+						}
+				iUser(con, objTrans, 1);
+			}
+		}
+	} else {
+		res.send("No data given");
+	}
 
+	}); 
 
-		app.get('/api_test/:token', function(req, res) {
-			var token = req.params.token || req.body.token;
-			jwt.verify(token, 'clavearrecha', function(err, decoded){
-				if (err) {
-					return res.json({success:false, message:'Failed to auth token'});
+	app.get('/usuarios/login/:username/:password', function(req, res){
+	console.log('Entro')
+		var username = req.params.username;
+		var password = req.params.password;	
+		var query = "SELECT * FROM `usuario` WHERE `usuario` = '"+ username + "' AND `password` = '"+ password + "'";
+		console.log(query);
+		con.query(query, function(error, rows) {
+			if(error) {
+				res.send(error);
+			} else {
+				var id = rows[0];
+				console.log('id');
+				console.log(id);
+				if (id !== undefined) {
+					console.log('entro a la zona');
+					if (id.id_tipo === 1) {
+					//Es transportista
+					console.log("Para no tomar");
+					let query = "SELECT * FROM `transportista` WHERE `id_transportista` = '"+ id.id_tr + "';"
+					console.log(query);
+					con.query(query, function(error, rows) {
+						if (error) {
+							res.send(error);
+						} else {
+							res.send(rows);
+						}
+
+					});
 				} else {
-					req.decoded = decoded;
-					res.send("token auth successful");
+					// No es transportista
+					//Es transportista
+					let query = "SELECT FROM * `usuario` WHERE id_persona = '"+ id.id_persona + "';"
+					console.log(query);
+					con.query(query, function(error, rows) {
+						if (error) {
+							res.send(error);
+						} else {
+							res.send(rows);
+						}
+
+					});
+				}
+				} else {
+					res.json({success: false, message: "Auth wrong"});
+				}
+
+			}
+		});
+	});
+	
+	app.post('/usuarios/login', function(req, res) {
+		var email = req.body.email;
+		var password = req.body.password;	
+		var query = "SELECT * FROM `usuarios` WHERE `email` = "+ con.escape(email) + " AND `password` = "+ con.escape(password);
+		con.query(query, function(error, rows) {
+			if(error) {
+				res.send(error);
+			} else {
+				if (rows.length == 0) {
+					res.send(false);
+				} else {
+					res.send(rows);
+				}
 				}
 			});
-
 		});
+
+
+	app.get('/api_test/:token', function(req, res) {
+		var token = req.params.token || req.body.token;
+		jwt.verify(token, 'clavearrecha', function(err, decoded){
+			if (err) {
+				return res.json({success:false, message:'Failed to auth token'});
+			} else {
+				req.decoded = decoded;
+				res.send("token auth successful");
+			}
+		});
+
+	});
 
 
 	app.post('/transportistas/documentos/base64', function(req, res) {
