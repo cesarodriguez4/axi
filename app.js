@@ -22,9 +22,6 @@ server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
 
-
-var jwt = require('jsonwebtoken');
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -177,10 +174,6 @@ io.on('connection', function(socket) {
       if (idTipo == 1) {
         console.log('Arriba');
         queries.updateWhere(connection, 'solicitudes_ondemand', 'activa', '0', 'id_transportista', id);
-        var ains = {
-          tipo: 0, 
-          id
-        }
         console.log("fue cancelada");
         socket.broadcast.emit("fue-cancelada", {id_pasajero: id, socket:'fue-cancelada'} );
       } else {
@@ -204,7 +197,7 @@ io.on('connection', function(socket) {
       id_transportista, 
       id_pasajero, 
       socket:'esta-en-sitio'
-    }
+    };
     socket.broadcast.emit('esta-en-sitio', obj);
   });
 
@@ -214,7 +207,7 @@ io.on('connection', function(socket) {
     console.log('se ha recibido evento: iniciar-viaje');
     obj = JSON.parse(obj);
       //El transportista empieza el viaje
-      var id_viaje = obj.id_viaje
+      var id_viaje = obj.id_viaje;
       var idtransportista = obj.id_transportista;
       var id_pasajero = obj.id_pasajero;
       var origen = obj.origen;
@@ -226,7 +219,7 @@ io.on('connection', function(socket) {
 
       socket.broadcast.emit("inicio-viaje", {id_pasajero, socket: 'inicio-viaje'});
 
-      queryObj = {
+      var queryObj = {
         id_viaje,
         idtransportista, 
         id_pasajero,
@@ -235,7 +228,7 @@ io.on('connection', function(socket) {
         monto,
         fecha_solicitud, 
         status_servicio
-      }
+      };
       
 
       queries.insert(connection, queryObj, 'historial');
@@ -265,7 +258,7 @@ io.on('connection', function(socket) {
          socket: 'viaje-culminado', 
          id_pasajero, 
          idtransportista
-       }
+       };
      socket.broadcast.emit('viaje-culminado', objeto );
 
       var myObj = {
@@ -277,7 +270,7 @@ io.on('connection', function(socket) {
         status_servicio,
         origen, 
         destino
-      }
+      };
       console.log('evento: viaje-culminado');
      
     queries.updateValuesWhere(connection, 'historial', myObj, 'id_viaje', id_viaje);     
