@@ -34,23 +34,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+/*
 var connection = mysql.createConnection({
   host     : 'sulnwdk5uwjw1r2k.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
   user     : 'kkkhei9ryz1aiv0f',
   password : 'admfjegby5p90v7e',
   database : 'u7lrzhpsxoefbtnz'
-}); 
+}); */
 
 
-/*
+
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
   database : 'appxi'
 }); 
-*/
+
 
 cloudinary.config({
   cloud_name: 'hhyprrrtz', 
@@ -80,7 +80,7 @@ require('./routes/sockets')(app, connection);
 require('./routes/token')(app, connection);
 require('./routes/ubicaciones')(app, connection);
 require("./routes/recuperar")(app, connection);
-require("./routes/chat")(app);
+require("./routes/chat")(app, connection);
 
 //Cron Job
 require('./modules/cron')(connection);

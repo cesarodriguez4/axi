@@ -22,7 +22,7 @@ module.exports = function(app, connection) {
 		var tipo = req.body.tipo;
 		var id = req.body.id;
 		if (tipo == 1) {
-			var q = "SELECT id_pasajero FROM `chat` WHERE id_transportista = " + connection.escape(id);
+			var q = "SELECT DISTINCT id_pasajero, nombre FROM `chat` INNER JOIN `usuarios` ON usuarios.id = chat.id_transportista WHERE id_transportista =" + connection.escape(id);
 			console.log(q);
 			connection.query(q, function(error, result) {
 				if (error) {
@@ -31,7 +31,7 @@ module.exports = function(app, connection) {
 				return res.send(result);
 			});
 		} else {
-			var q = "SELECT id_transportista FROM `chat` WHERE id_pasajero = " + connection.escape(id);
+			var q = "SELECT DISTINCT id_transportista, nombre FROM `chat` INNER JOIN `usuarios` ON usuarios.id = chat.id_pasajero WHERE id_pasajero =" + connection.escape(id);
 			console.log(q);
 			connection.query(q, function(error, result) {
 				if (error) {
