@@ -1,0 +1,27 @@
+body {
+	background-color: grey;
+	text-align: center;
+}
+p {
+ color: white;, 
+ font-family: lato, open sans, arial;
+ font-size: 2em;
+}
+
+input[type="password"] {
+	padding: 1em;
+	padding: 1em;
+	border: 1px solid #ffbd38;
+}
+
+.main {
+	margin-top: 5em;
+}
+
+input[type="submit"] {
+	background-color: white;
+	padding: 1em;
+	color: #ffbd38;
+	border: 1px solid #ffbd38;
+	border-radius: 5px;
+}
