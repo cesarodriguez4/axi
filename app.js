@@ -82,6 +82,7 @@ require('./routes/token')(app, connection);
 require('./routes/ubicaciones')(app, connection);
 require("./routes/recuperar")(app, connection);
 require("./routes/chat")(app, connection);
+require("./routes/historial")(app, connection);
 
 //Cron Job
 require('./modules/cron')(connection);
