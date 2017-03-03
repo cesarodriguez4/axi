@@ -127,6 +127,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 					if (error) {
 						console.log(error);
 					} else {
+						console.log('los rows');
+						console.log(rows);
 						var res_pasajero = {
 							id_transportista: menorId,
 							id_pasajero: id, 
