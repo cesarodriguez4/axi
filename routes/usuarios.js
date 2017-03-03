@@ -21,23 +21,16 @@ function iUser(con, object, tipo) {
 		
 		app.post('/usuarios/nuevo', function(req, res) {
 
-		var id, nombre, apellido, email, password, telefono, id_tipo;
+		var dni, estado, ciudad, year_vehiculo, marca_vehiculo;
+		var modelo_vehiculo, placa_vehiculo;
 
-		var dni, estado, ciudad, year_vehiculo, marca_vehiculo, modelo_vehiculo, placa_vehiculo;
-
-		id = Math.floor(Math.random() * 1e6) + 1;
-
-		console.log(req.body.foto);
-
-		console.log(req.body);
-		if (req.body !== undefined) {
-			
-		nombre = req.body.nombre;
-		apellido = req.body.apellido;
-		email = req.body.email;
-		password = req.body.password;
-		telefono = req.body.telefono;
-		id_tipo = req.body.id_tipo;
+		var id = Math.floor(Math.random() * 1e6) + 1;	
+		var nombre = req.body.nombre;
+		var apellido = req.body.apellido;
+		var email = req.body.email;
+		var password = req.body.password;
+		var telefono = req.body.telefono;
+		var id_tipo = req.body.id_tipo;
 
 		if(req.body.foto) {
 			var foto = req.body.foto;
@@ -47,7 +40,6 @@ function iUser(con, object, tipo) {
 
 			fs.writeFile("public/images/"+fileName+".jpg", bitmap, function(error, success) {
 				if (error) {
-					console.log(error);
 					var object = {
 						id,
 						nombre, 
@@ -59,11 +51,9 @@ function iUser(con, object, tipo) {
 						id_tipo
 					};
 					queries.insertWRes(res, con , object,'usuarios');
-					res.json({error: true});
 				} else {
 			        cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
 			           var foto_perfil = result.url;
-			            console.log(result);
 				            var object = {
 				            id,
 							nombre, 
@@ -101,11 +91,10 @@ function iUser(con, object, tipo) {
 							placa_vehiculo
 						}
 
-						if (id_tipo ==1) {
+						if (id_tipo == 1) {
 							iUser(con, objTrans, 1)
 						}
 						queries.insertWRes(res, con , object,'usuarios');
-          
  					});
 				}
 			});
@@ -150,13 +139,9 @@ function iUser(con, object, tipo) {
 				iUser(con, objTrans, 1);
 			}
 		}
-	} else {
-		res.send("No data given");
-	}
-
 	}); 
 
-	app.get('/usuarios/login/:username/:password', function(req, res){
+	app.get('/usuarios/login/:username/:password', function(req, res) {
 	console.log('Entro')
 		var username = req.params.username;
 		var password = req.params.password;	
