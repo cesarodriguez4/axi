@@ -55,8 +55,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 				var menorId = rows[0].id;
 
 				if (isNaN(menor)) {
-					console.log('matraqueando')
-					menor = 1e10
+					menor = 1e10;
 				}
 				//Para todo el resto de las ubicaciones ...
 				for (var i=1; i<rows.length; i++) {
@@ -121,6 +120,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 
 				//Se cambia el status al transportista
 				queries.updateWhere(con, 'transportistas', 'status', '0', 'id', menorId );
+				console.log('Por aquica')
 				var queryTrans = "SELECT *  FROM `transportistas` WHERE `id` = "+menorId;
 				console.log(queryTrans);
 				con.query(queryTrans, function(error, rows) {
