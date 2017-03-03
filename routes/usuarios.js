@@ -109,7 +109,6 @@ function iUser(con, object, tipo) {
  					});
 				}
 			});
-			res.json("ok");
 		} else {
 			var object = {
 							id,
