@@ -71,7 +71,6 @@ app.use('/', routes);
 app.use('/users', users);
 require('./routes/api')(app, connection);
 require('./routes/usuarios')(app, connection);
-require('./routes/posiciones')(app, connection);
 require('./routes/tarifas')(app, connection);
 require('./routes/pagos')(app, connection);
 require('./routes/sos')(app, connection);

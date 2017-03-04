@@ -1,6 +1,4 @@
 var queries = require('../modules/mysqli_crud.js');
-var jwt = require('jsonwebtoken');
-
 
 module.exports = function (app, connection) {
 
