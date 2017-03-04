@@ -74,7 +74,7 @@ require('./routes/usuarios')(app, connection);
 require('./routes/tarifas')(app, connection);
 require('./routes/pagos')(app, connection);
 require('./routes/sos')(app, connection);
-
+require('./routes/solicitudes')(app, connection);
 require('./routes/upload')(app, connection);
 require('./routes/sockets')(app, connection);
 require('./routes/token')(app, connection);
