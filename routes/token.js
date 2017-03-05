@@ -10,9 +10,7 @@ module.exports = function(app, con) {
 		if (tipo) {
 			table = 'transportistas';
 		}
-
 		var query = "SELECT * FROM `"+ table + "` WHERE id = '" + id + "' AND password = '" + pass + "';";
-		
 		con.query(query, function(error, row) {
 			if (error) {
 				console.log(error);

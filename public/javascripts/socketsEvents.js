@@ -84,6 +84,15 @@ function culminar_viaje() {
 	socket.emit('culminar-viaje', obj);
 }
 
+function SOS() {
+	var obj = {
+		id_transportista: document.getElementById("id_transportista").value, 
+		id_pasajero: document.getElementById("id_pasajero").value
+	};
+	obj = JSON.stringify(obj);
+	socket.emit('SOS', obj);
+}
+
 socket.on('fue-cancelada', function(data) {
 	console.log(data);
 });
@@ -95,4 +104,8 @@ socket.on('inicio-viaje', function(data) {
 
 socket.on('viaje-culminado', function(data) {
 	console.log(data);
+});
+
+socket.on('nuevo_sos', function(data) {
+	alert(data);
 });

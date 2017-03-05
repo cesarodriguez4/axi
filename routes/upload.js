@@ -25,38 +25,22 @@ module.exports = function(app, con) {
        var bitmap = new Buffer(img, 'base64');
        var fileName = Date.now();
 
-      var id = req.body.id;
-      var campo = req.body.campo;
-      var foto_perfil = fileName + ".jpg";
+       var id = req.body.id;
+       var campo = req.body.campo;
+       var foto_perfil = fileName + ".jpg";
       
-      fs.writeFile("public/images/"+foto_perfil, bitmap, function(error) {
+       fs.writeFile("public/images/"+foto_perfil, bitmap, function(error) {
         if (error) {
           console.log(error);
         } else {
           cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
             console.log(result);
-            queries.updateWhere(con, 'transportistas', campo, result.url, 'id', id);
+            queries.updateWhere(con, 'usuarios', campo, result.url, 'id', id);
           });
           }
       });
       res.send("ok");
     });
-
-    app.post('/transportistas/foto', function(req, res) {
-      upload(req,res,function(err) {
-        var id = req.body.id;
-        var campo = req.body.campo;
-        if(err) {
-          res.json({error_code:1,err_desc:err});
-          return;
-        }
-        cloudinary.uploader.upload(req.file.path, function(result) {
-          console.log(result);
-          queries.updateWhere(con, 'transportistas', campo, result.url, 'id', id);
-         });
-        res.json("ok");
-        });   
-       });
 
     app.post('/transportistas/foto/base64', function(req, res) {
       var img = req.body.img;
@@ -79,28 +63,5 @@ module.exports = function(app, con) {
       });
       res.send("ok");
   }); 
-
-   app.post('/prueba', function(req, res, next) {
-        upload(req,res,function(err){
-            var id = req.body.id;
-            var campo = req.body.campo;
-            console.log(req.file.path);
-               if(err) {
-                    res.json({error_code:1,err_desc:err});
-                    return;
-               }
-              res.json("ok");
-              cloudinary.uploader.upload(req.file.path, function(result) {
-                console.log(result);
-              });
-           });
-    });
-
-
-   app.post('/prueba/64', function(req, res, next) {
-    var id = req.body.id;
-    var campo = req.body.campo;
-    var file  = req.body.file;
-    });
 
  }

@@ -121,6 +121,7 @@ app.use(function(err, req, res, next) {
 io.on('connection', function(socket) {
 
   require("./modules/chat")(socket, connection);
+  require("./modules/sos")(socket, connection);
 
   console.log('Socket.io connectado');
   socket.on('solicitud-de-cliente', function(data) {

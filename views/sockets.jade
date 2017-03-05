@@ -2,7 +2,6 @@ doctype html
 html
 	head
 		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-		link(rel="stylesheet", href="/stylesheets/sockets.css")
 		script(src="https://cdn.socket.io/socket.io-1.4.5.js")
 		title Websockets
 		//script(src="/bower_components/socket.io-client/dist/socket.io.js")
@@ -51,6 +50,19 @@ html
 			.row
 				div(class="col-md-12 mt-2 text-center")
 					button(class="btn btn-default", onclick="culminar_viaje()") Culminar Viaje
+
+			.row
+				div(class="col-md-12 mt-2 text-center")
+					button(class="btn btn-default", onclick="SOS()") Enviar SOS
+				form(class="col-md-5 mt-2 text-center")
+					fieldset
+						legend Datos de SOS
+						.row(class="form-group")
+							span id_pasajero:
+							input(type="text" id="id_pasajero")
+						.row(class="form-group")
+							span id_transportista:
+							input(type="text" id="id_transportista")
 
 
 		script(src="/javascripts/socketsEvents.js")

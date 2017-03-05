@@ -7,49 +7,29 @@ module.exports = function(app, con) {
 	});
 
 	app.post("/monto", function(req, res) {
-
-		var distancia = req.body.distancia;
 		var tiempo = req.body.tiempo;
+		var distancia = req.body.distancia;
 		var tipoServicio = req.body.tipoServicio;
 
-		var precio_dist, precio_tiempo;
+		tipoServicio = tipoServicio.toUpperCase();
 
-		if (tipoServicio == 'vip') {
-			var query = "SELECT `distancia`, `tiempo` FROM `costos` WHERE `tipo` = 'vip' ";
-			console.log(query);
-			con.query(query, function(error, row) {
-				if (error) {
-					res.send(error);
-				} else {
-					if (row) {
-						precio_dist = row[0].distancia;
-						precio_tiempo = row[0].tiempo;
-
-						var calculo = precio_dist * distancia + precio_tiempo * tiempo;
-          				res.json(calculo);
-					} else {
-						res.send("No prices in database");
-					}
-					
+		con.query("SELECT * FROM `costos`", function(error, result) {
+			if (error) {
+				return console.log(error);
+			}
+			console.log(result);
+			for (i=0; i<result.length; i++) {
+				console.log(i);
+				var servicio_tabla = result[i].tipo.toUpperCase();
+				console.log(tipoServicio);
+				console.log(servicio_tabla);
+				if (tipoServicio == servicio_tabla) {
+					precio_dist = result[i].distancia;
+					precio_tiempo = result[i].tiempo;
+					var calculo = precio_dist * distancia + precio_tiempo * tiempo;
+          			res.json(calculo);
 				}
-			});
-		} else {
-          	var query = "SELECT `distancia`,`tiempo` FROM `costos` WHERE `tipo` = 'tradicional'";	
-          	con.query(query, function(error, row) {
-          		if (error) {
-          			console.log(error);
-          		} else {
-          			if (row) {
-						precio_dist = row[0].distancia;
-						precio_tiempo = row[0].tiempo;
-
-						var calculo = precio_dist * distancia + precio_tiempo * tiempo;
-          				res.json(calculo);
-					} else {
-						res.send("No prices in database");
-					}
-          		}
-          	});
-		}
+			}
+		});
 	});
 }
