@@ -1,22 +1,20 @@
 var queries = require('../modules/mysqli_crud');
-var jwt = require("jsonwebtoken");
 
-module.exports = function(app, con) {
-	app.post('/SOS', function(req, res) {
-		var token = req.body.token;
-		var transportista = req.body.id_transportista;
+module.exports = function(app, con) { 
 
-		var yeison = {
-			transportista
-		}
+	app.post('/SOS/agregar', function(req, res) {
+		var id_pasajero = req.body.id_pasajero;
+		var telefono_sos = req.body.telefono_sos;
+		var obj = {
+			id_pasajero, 
+			telefono_sos
+		};
+		queries.insertWRes(res, con, obj, 'sos');
+	});
 
-		jwt.verify(token, 'clavearrecha', function(error) {
-			if (error) {
-				res.json({success: false, message: "Auth failed"});
-			} else {
-				queries.insert(con, yeison, 'sos');
-				res.json({success: true, message: "Sos procesada correctamente"});
-			}
-		});
-	})
+	app.post('/SOS/contactos', function(req, res) {
+		var id_pasajero = req.body.id_pasajero;
+		queries.selectWRes(res, con, 'sos', 'id_pasajero',id_pasajero);
+	});
+
 }

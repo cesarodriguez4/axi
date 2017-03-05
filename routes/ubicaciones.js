@@ -14,7 +14,7 @@ module.exports = function (app, connection) {
 			lat, 
 		}; 
 		queries.deleteAllWhere( connection, 'ubicaciones_transportistas', 'id', id );
-		queries.insertWRes(res, connection , object,'ubicaciones_transportistas');
+		queries.insertWRes(res, connection , object ,'ubicaciones_transportistas');
 	});
 
 }

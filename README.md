@@ -110,11 +110,17 @@ Valores:
 - kilometros
 - monto
 
-## SOS 
-`` post: /SOS ``
+# SOS 
+## Insertar nuevo contacto SOS como pasajero
+`` post: /SOS/agregar ``    
+Valores:    
+- id_pasajero
+- telefono_sos
+
+## Obtener lista de contacto SOS por pasajero
+``post: /SOS/contactos ``
 Valores:
-- token
-- id_transportista
+- id_pasajero
 
 ## tarifas
 `` get: /tarifas/:token ``

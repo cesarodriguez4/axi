@@ -6,7 +6,6 @@ module.exports = function(app, con) {
 		var pass = req.body.password;
 		var tipo = req.body.tipo;
 		var table = 'pasajeros';
-
 		if (tipo) {
 			table = 'transportistas';
 		}
