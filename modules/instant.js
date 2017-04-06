@@ -55,7 +55,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 				//Si es asi arrojamos que no existe usuario Cerca.
 				console.log('La distancia menor es', menor);
 					if (menor < 15000) {
-						var consulta ="SELECT * FROM `pasajeros` WHERE `id` = " + con.escape(id); 
+						var consulta ="SELECT * FROM `usuarios` WHERE `id` = " + con.escape(id); 
 						con.query(consulta, function(error, rows) {
 						if(error) {
 							return console.log(error);
