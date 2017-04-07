@@ -56,6 +56,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 				console.log('La distancia menor es', menor);
 					if (menor < 15000) {
 						var consulta ="SELECT * FROM `usuarios` WHERE `id` = " + con.escape(id); 
+						
 						con.query(consulta, function(error, rows) {
 						if(error) {
 							return console.log(error);
@@ -171,6 +172,7 @@ function lista(res,con, id, lon, lat) {
 	*/
 
 	var query = "SELECT * from `ubicaciones_transportistas` inner join `transportistas` on transportistas.id = ubicaciones_transportistas.id";
+	console.log(query);
 	con.query(query, function(error, result) {
 		if (error) {
 			return console.log(error);
