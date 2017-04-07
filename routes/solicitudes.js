@@ -46,8 +46,8 @@ module.exports = function(app, con) {
 
 	app.post('/solicitud/cercanos', function(req, res) {
       var id = req.body.id_usuario;
-      var lon = req.body.lon;
-      var lat = req.body.lat;
+      var lon = Number(req.body.lon);
+      var lat = Number(req.body.lat);
  
       instant.lista(res,con,'ubicaciones_transportistas', id, lon, lat);
   });
