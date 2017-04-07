@@ -239,6 +239,19 @@ io.on('connection', function(socket) {
   
   });
 
+   socket.on('detener-viaje', function(obj) {
+    obj = JSON.parse(obj);
+    var id_transportista = obj.id_transportista;
+    var id_pasajero = obj.id_pasajero; 
+    var nObj = {
+      id_transportista, 
+      id_pasajero, 
+      socket: 'viaje-detenido'
+    }
+    socket.broadcast.emit('viaje-detenido', nObj);
+  });
+
+
 
   socket.on('culminar-viaje', function(obj) {
     console.log('culminar-viaje');
