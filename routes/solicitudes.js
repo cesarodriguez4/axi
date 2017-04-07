@@ -48,8 +48,8 @@ module.exports = function(app, con) {
       var id = req.body.id_usuario;
       var lon = Number(req.body.lon);
       var lat = Number(req.body.lat);
- 
-      instant.lista(res,con,'ubicaciones_transportistas', id, lon, lat);
+ 	
+      instant.lista(res,con, id, lon, lat);
   });
 
 	app.post('solicitudes/historial/nuevo', function(req, res) {
