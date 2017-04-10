@@ -45,10 +45,10 @@ module.exports = function(app, con) {
 	app.post('/resetPassword', function(req, res) {
 		var email = req.body.email;
 		var tipo = req.body.tipo;
-		var tabla = 'transportistas';
+		var tabla = 'usuarios';
 
 		if (tipo == 0) {
-			tabla = 'personas';
+			tabla = 'usuarios';
 		}
 
 		var query = "SELECT * FROM `"+tabla+'` WHERE email = ' + con.escape(email); 
