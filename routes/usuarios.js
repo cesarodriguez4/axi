@@ -3,6 +3,8 @@ var jwt = require("jsonwebtoken");
 var fs = require("fs");
 var cloudinary = require('cloudinary');
 
+var sql = require("sql-crud");
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -19,8 +21,8 @@ function iUser(con, object, tipo) {
 
 	module.exports = function(app, con) {
 		
-		app.post('/usuarios/nuevo', function(req, res) {
 
+		app.post('/usuarios/nuevo', function(req, res) {
 		var dni, estado, ciudad, year_vehiculo, marca_vehiculo;
 		var modelo_vehiculo, placa_vehiculo;
 
@@ -176,8 +178,17 @@ function iUser(con, object, tipo) {
 					res.json({status: ' Update listo.'});
 				}
 			});
+		
+		});
 
-			
+		app.post("perfil/pasajero/actualiza", function(req, res) {
+			var crud = new sql("mysql");
+			crud.update(con, req.body , function(error, results) {
+				if (error) {
+					return console.log(error);
+				}
+				return console.log(results);
+			});
 		});
 
 		app.post("/validacion/documentos", function(req, res) {
