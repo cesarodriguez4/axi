@@ -183,7 +183,7 @@ function iUser(con, object, tipo) {
 
 		app.post("perfil/pasajero/actualiza", function(req, res) {
 			var crud = new sql("mysql");
-			crud.update(con, req.body , function(error, results) {
+			crud.update(con, {table: 'usuarios': set: req.body, where: {id: req.body.id}} , function(error, results) {
 				if (error) {
 					return console.log(error);
 				}
