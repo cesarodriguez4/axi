@@ -183,13 +183,13 @@ function iUser(con, object, tipo) {
 
 		app.post("perfil/pasajero/actualiza", function(req, res) {
 			var crud = new sql("mysql");
-			crud.update(con, {table: 'usuarios': set: req.body, where: {id: req.body.id}} , function(error, results) {
+			crud.update(con, {table: 'usuarios', set: req.body, where: {id: req.body.id}} , function(error, results) {
 				if (error) {
 					return console.log(error);
 				}
 				return console.log(results);
 			});
-			crud.update(con, {table: 'transportistas': set: req.body, where: {id: req.body.id}});
+			crud.update(con, {table: 'transportistas', set: req.body, where: {id: req.body.id}});
 		});
 
 		app.post("/validacion/documentos", function(req, res) {
