@@ -189,6 +189,7 @@ function iUser(con, object, tipo) {
 				}
 				return console.log(results);
 			});
+			crud.update(con, {table: 'transportistas': set: req.body, where: {id: req.body.id}});
 		});
 
 		app.post("/validacion/documentos", function(req, res) {
