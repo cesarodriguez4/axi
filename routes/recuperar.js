@@ -71,7 +71,7 @@ module.exports = function(app, con) {
 				template += '<body>';
 				template += '<h1>Estás solo a un paso de recuperar tu contraseña</h1>';
 				template += '<p>Sigue el siguiente enlace para completar el proceso:</p>';
-				template += '<br><a href="appxi.herokuapp.com/restore?token='+token+'&e='+email+'&t='+tabla+'">Haz click en este enlace</a><br>';
+				template += '<br><a href="https://appxi.herokuapp.com/restore?token='+token+'&e='+email+'&t='+tabla+'">Haz click en este enlace</a><br>';
 				template += '<span>Este link tiene una caducidad de 24 horas</span>';
 				//Envio del correo
 				let mail = {
