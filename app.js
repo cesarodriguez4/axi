@@ -9,6 +9,7 @@ var cloudinary = require('cloudinary');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var mysql = require('mysql');
+var cors = require('cors');
 
 var app = express();
 var server = require('http').createServer(app);
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 
 var connection = mysql.createConnection({
