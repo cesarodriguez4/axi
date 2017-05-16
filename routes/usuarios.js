@@ -160,26 +160,14 @@ function iUser(con, object, tipo) {
 			});
 		});
 	
-		app.post('/update', function(req, res) {
-			var tabla = req.body.tabla;
+		app.post('/update/transportista', function(req, res) {
+			var tabla = 'transportistas';
 			var campo = req.body.campo;
 			var valor = req.body.valor;
-			var token = req.body.token;
-
-			console.log(req.body);
-			var donde = req.body.donde;
-			var dondeValor = req.body.dondeValor;
-			jwt.verify(token, 'clavearrecha', function(error, decoded) {
-				if (error) {
-					res.json({status: 'Auth failed'});
-				} else {
-					queries.updateWhere(con, tabla, campo, valor, donde, dondeValor);
-					req.decoded = decoded;
-					res.json({status: ' Update listo.'});
-				}
+			var id = req.body.id;
+				queries.updateWhere(con, tabla, campo, valor, 'id', id);
+				res.send('ok');
 			});
-		
-		});
 
 		app.post("perfil/pasajero/actualiza", function(req, res) {
 			var crud = new sql("mysql");
