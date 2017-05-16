@@ -160,7 +160,7 @@ function iUser(con, object, tipo) {
 			});
 		});
 	
-		app.post('/update/transportista', function(req, res) {
+		app.post('/perfil/modificar', function(req, res) {
 			var tabla = 'transportistas';
 			var campo = req.body.campo;
 			var valor = req.body.valor;
