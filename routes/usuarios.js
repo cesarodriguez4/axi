@@ -172,13 +172,16 @@ function iUser(con, object, tipo) {
 		app.post("/perfil/pasajero/actualiza", function(req, res) {
 			console.log(req.body);
 			var crud = new sql("mysql");
-			crud.update(con, {table: 'usuarios', set: req.body, where: {id: req.body.id}} , function(error, results) {
-				if (error) {
-					return console.log(error);
-				}
-				return console.log(results);
-			});
-			crud.update(con, {table: 'transportistas', set: req.body, where: {id: req.body.id}});
+			crud.update(con, {
+				table: 'usuarios',
+				values: req.body,
+				where: {id: req.body.id}
+			}, false, true);
+			crud.update(con, {
+				table: 'transportistas',
+				values: req.body,
+				where: {id: req.body.id}
+			}, false, true);
 			res.send('ok');
 		});
 
