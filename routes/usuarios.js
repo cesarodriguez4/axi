@@ -169,7 +169,7 @@ function iUser(con, object, tipo) {
 				res.send('ok');
 			});
 
-		app.post("perfil/pasajero/actualiza", function(req, res) {
+		app.post("/perfil/pasajero/actualiza", function(req, res) {
 			var crud = new sql("mysql");
 			crud.update(con, {table: 'usuarios', set: req.body, where: {id: req.body.id}} , function(error, results) {
 				if (error) {
