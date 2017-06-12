@@ -14,11 +14,13 @@ module.exports = function(app, con) {
 	});
 
 	app.get("/historial", (req, res) => {
-		crud.select(con, {select: '*', from: 'historial'}, (err, results) => {
+		const myquery = "SELECT * FROM historial INNER JOIN usuarios ON usuarios.id = historial.id_pasajero;"
+		con.query(myquery, (err, resu) => {
 			if (err) {
-				return res.send(err);
+				res.send(err);
 			}
-			return res.send(results);
+			console.log(myquery);
+			res.send(resu);
 		});
 	});
 }
