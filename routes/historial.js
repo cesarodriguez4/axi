@@ -14,7 +14,7 @@ module.exports = function(app, con) {
 	});
 
 	app.get("/historial", (req, res) => {
-		const myquery = "SELECT * FROM historial INNER JOIN usuarios ON usuarios.id = historial.id_pasajero;"
+		const myquery = "SELECT *, trans.nombre transportista, usuarios.nombre pasajero FROM historial INNER JOIN usuarios ON usuarios.id = historial.id_pasajero INNER JOIN usuarios trans ON trans.id = historial.id_transportista;";
 		con.query(myquery, (err, resu) => {
 			if (err) {
 				res.send(err);
