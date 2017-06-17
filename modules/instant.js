@@ -107,7 +107,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							var res_pasajero = {
 								id_pasajero: id, 
 								id_transportista: menorId,
-								fullname: rows[0].nombre + ' ' + rows[0].apellidos, 
+								fullname: rows[0].nombre + ' ' + rows[0].apellido, 
 								reputacion: rows[0].reputacion, 
 								placa: rows[0].placa ,
 								color:  rows[0].color_auto ,
