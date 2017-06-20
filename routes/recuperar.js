@@ -2,10 +2,10 @@
 var queries = require('../modules/mysqli_crud.js');
 const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
-	service: 'Hotmail',
+	service: 'Gmail',
 	auth: {
-		user: 'cesarodriguez4@hotmail.com',
-		pass: 'cesar25063730'
+		user: 'appximx@gmail.com',
+		pass: 'vertigo02'
 	}
 });
 

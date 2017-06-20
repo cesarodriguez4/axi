@@ -85,6 +85,7 @@ require("./routes/recuperar")(app, connection);
 require("./routes/chat")(app, connection);
 require("./routes/historial")(app, connection);
 require("./routes/favoritos")(app, connection);
+require("./routes/openpay")(app, connection);
 
 //Cron Job
 require('./modules/cron')(connection);
