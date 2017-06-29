@@ -36,10 +36,10 @@ module.exports = function(app, con) {
           cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
             console.log(result);
             queries.updateWhere(con, 'usuarios', campo, result.url, 'id', id);
+            res.send({ok: true, url: result.url});
           });
           }
       });
-      res.send("ok");
     });
 
     app.post('/transportistas/foto/base64', function(req, res) {
@@ -58,10 +58,10 @@ module.exports = function(app, con) {
           cloudinary.uploader.upload("public/images/"+foto_perfil, function(result) {
             console.log(result);
             queries.updateWhere(con, 'transportistas', campo, result.url, 'id', id);
+            res.send({ok: true, url: result.url});
           });
           }
       });
-      res.send("ok");
   }); 
 
  }
