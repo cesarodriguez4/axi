@@ -25,8 +25,8 @@ var queries = require("./mysqli_crud");
 
 
 function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal, latFinal) {
-	console.log('origen');
-	console.log('destino');
+	console.log(origen);
+	console.log(destino);
 	console.log('id',id);
 	console.log('lon',lon);
 	console.log('lat',lat);
