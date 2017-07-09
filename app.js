@@ -214,7 +214,7 @@ io.on('connection', function(socket) {
     obj = JSON.parse(obj);
       //El transportista empieza el viaje
       var id_viaje = obj.id_viaje;
-      var idtransportista = obj.id_transportista;
+      var id_transportista = obj.id_transportista;
       var id_pasajero = obj.id_pasajero;
       var origen = obj.origen;
       var destino = obj.destino;
@@ -227,7 +227,7 @@ io.on('connection', function(socket) {
 
       var queryObj = {
         id_viaje,
-        idtransportista, 
+        id_transportista, 
         id_pasajero,
         origen, 
         destino, 
@@ -264,7 +264,7 @@ io.on('connection', function(socket) {
     // El transportista ha culminado un viaje
       var calificacion_pasajero = obj.calificacion_pasajero;
       var comentario_pasajero = obj.comentario_pasajero; 
-      var idtransportista = obj.idtransportista;
+      var id_transportista = obj.idtransportista;
       var id_pasajero = obj.id_pasajero;
       var id_viaje = obj.id_viaje;
       var origen = obj.origen;
@@ -276,14 +276,14 @@ io.on('connection', function(socket) {
          id_viaje, 
          socket: 'viaje-culminado', 
          id_pasajero, 
-         idtransportista
+         id_transportista
        };
      socket.broadcast.emit('viaje-culminado', objeto );
 
       var myObj = {
         calificacion_pasajero,
         comentario_pasajero,
-        idtransportista,
+        id_transportista,
         id_pasajero,
         id_viaje, 
         status_servicio,
