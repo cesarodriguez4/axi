@@ -25,6 +25,8 @@ var queries = require("./mysqli_crud");
 
 
 function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal, latFinal) {
+	console.log('origen');
+	console.log('destino');
 	console.log('id',id);
 	console.log('lon',lon);
 	console.log('lat',lat);
@@ -89,8 +91,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							var cancelaJson = {
 								id_pasajero: id, 
 								id_transportista: menorId,
-								destinoInicial: origen, 
-								destinoFinal: destino 
+								destinoInicial: origen.replace("'", "\'"), 
+								destinoFinal: destino.replace("'", "\'") 
 							}
 							queries.insert(con, cancelaJson, 'solicitudes_ondemand');
 						} else {
