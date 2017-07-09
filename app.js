@@ -139,7 +139,7 @@ io.on('connection', function(socket) {
   socket.on('solicitud-aceptada', function(data) {
       var obj = JSON.parse(data);
       console.log('solicitud-aceptada');
-      socket.broadcast.emit('aceptada-cliente', {idSolicitud: obj.id_solicitud, id_pasajero: obj.id_pasajero, socket: 'aceptada-cliente' } );
+      socket.emit('aceptada-cliente', {idSolicitud: obj.id_solicitud, id_pasajero: obj.id_pasajero, socket: 'aceptada-cliente' } );
   });
 
   socket.on('lista-solicitudes', function() {
