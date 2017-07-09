@@ -125,7 +125,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							}
 							console.log(res_pasajero);
 							//res_pasajero = JSON.stringify(res_pasajero);
-							socket.emit("info-ondemand", res_pasajero);
+							socket.broadcast.emit("info-ondemand", res_pasajero);
 							} else {
 								console.log('no hay');
 							//No existe Transportista Cerca

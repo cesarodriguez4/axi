@@ -131,8 +131,8 @@ io.on('connection', function(socket) {
   socket.on('solicitud-de-cliente', function(data) {
     //Enviando a tabla solicitudes
     queries.insert(connection, data, 'solicitudes_ondemand');
-    socket.emit("solicitudes-a-taxistas", data);
-    socket.emit("status-socket", "success");
+    socket.broadcast.emit("solicitudes-a-taxistas", data);
+    socket.broadcast.emit("status-socket", "success");
   });
 
 //Cuando el taxista acepta una solicitud
@@ -148,7 +148,7 @@ io.on('connection', function(socket) {
       if (error) {
         console.log(error);
       } else {
-        socket.emit('lsolicitudes', rows);
+        socket.broadcast.emit('lsolicitudes', rows);
       }
     });
   });
