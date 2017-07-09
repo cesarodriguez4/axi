@@ -25,6 +25,8 @@ var queries = require("./mysqli_crud");
 
 
 function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal, latFinal) {
+	destino = destino.replace("'", "\'");
+	origen = origen.replace("'", "\'");
 	console.log(origen);
 	console.log(destino);
 	console.log('id',id);
