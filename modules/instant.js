@@ -108,8 +108,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							console.log(error);
 						} else {
 							console.log('resultado de inner join');
-							console.log()
-							var res_pasajero = {
+							if (rows[0].nombre) {
+								var res_pasajero = {
 								id_pasajero: id, 
 								id_transportista: menorId,
 								fullname: rows[0].nombre + ' ' + rows[0].apellido, 
@@ -126,6 +126,16 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							console.log(res_pasajero);
 							//res_pasajero = JSON.stringify(res_pasajero);
 							socket.emit("info-ondemand", res_pasajero);
+							} else {
+								console.log('no hay');
+							//No existe Transportista Cerca
+							var res_pasajero = {
+								id_pasajero: id, 
+								socket: 'no-hay-transportista'
+							}
+							//res_pasajero = JSON.stringify(res_pasajero);
+							socket.broadcast.emit("no-hay-transportista", res_pasajero);
+							}
 						}
 					});
 					
