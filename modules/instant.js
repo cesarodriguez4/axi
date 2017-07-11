@@ -79,8 +79,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 								telefono: rows[0].telefono, 
 								nombre: rows[0].nombre + ' ' + rows[0].apellido, 
 								socket: 'nueva-ondemand', 
-								lonInicial:lon, 
-								latInicial:lat, 
+								lon:lon, 
+								lat:lat, 
 								lonFinal:lonFinal, 
 								latFinal:latFinal, 
 								foto_perfil: rows[0].foto_perfil
