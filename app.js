@@ -264,7 +264,7 @@ io.on('connection', function(socket) {
     // El transportista ha culminado un viaje
       var calificacion_pasajero = obj.calificacion_pasajero;
       var comentario_pasajero = obj.comentario_pasajero; 
-      var id_transportista = obj.idtransportista;
+      var id_transportista = obj.id_transportista;
       var id_pasajero = obj.id_pasajero;
       var id_viaje = obj.id_viaje;
       var origen = obj.origen;
@@ -276,10 +276,10 @@ io.on('connection', function(socket) {
          id_viaje, 
          socket: 'viaje-culminado', 
          id_pasajero, 
-         idtransportista: id_transportista
+         id_transportista
        };
      console.log(objeto);
-     socket.emit('viaje-culminado', objeto );
+     socket.broadcast.emit('viaje-culminado', objeto );
 
       var myObj = {
         calificacion_pasajero,
