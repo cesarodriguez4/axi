@@ -278,7 +278,7 @@ io.on('connection', function(socket) {
          id_pasajero, 
          id_transportista
        };
-     socket.broadcast.emit('viaje-culminado', objeto );
+     socket.emit('viaje-culminado', objeto );
 
       var myObj = {
         calificacion_pasajero,
