@@ -275,11 +275,11 @@ io.on('connection', function(socket) {
         "ok": "true",
          id_viaje, 
          socket: 'viaje-culminado', 
-         idpasajero, 
+         id_pasajero, 
          idtransportista
        };
      console.log(objeto);
-     socket.broadcast.emit('viaje-culminado', objeto );
+     socket.emit('viaje-culminado', objeto );
 
       var myObj = {
         calificacion_pasajero,
