@@ -275,7 +275,7 @@ io.on('connection', function(socket) {
         "ok": "true",
          id_viaje, 
          socket: 'viaje-culminado', 
-         id_pasajero, 
+         idpasajero, 
          idtransportista
        };
      console.log(objeto);
