@@ -73,7 +73,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 						if(rows.length > 0 ) {
 							var res_transportista = {
 								id_pasajero: id,
-								id_transportista: menorId, 
+								id_transportista: menorId || 'error', 
 								origen, 
 								destino, 
 								telefono: rows[0].telefono, 
@@ -92,9 +92,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 
 							var cancelaJson = {
 								id_pasajero: id, 
-								id_transportista: menorId,
-								destinoInicial: origen.replace("'", "\'"), 
-								destinoFinal: destino.replace("'", "\'") 
+								id_transportista: menorId
 							}
 							queries.insert(con, cancelaJson, 'solicitudes_ondemand');
 						} else {
