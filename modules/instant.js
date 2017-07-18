@@ -43,7 +43,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 			console.log('vamos con el debug');
 			if (rows[0] !== undefined) {
 				var menor = minorD(lat, rows[0].lat, lon, rows[0].lon);
-				console.log("Menor D")
+				console.log("Menor D");
 				// ... y el primer Id tambien 
 				var menorId = rows[0].id;
 
@@ -63,7 +63,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 				//Evaluamos si la distancia menor es mayor a 15, 
 				//Si es asi arrojamos que no existe usuario Cerca.
 				console.log('La distancia menor es', menor);
-					if (menor < 15000) {
+					if (menor < 15000 && menor !== 0) {
 						var consulta ="SELECT * FROM `usuarios` WHERE `id` = " + con.escape(id); 
 						
 						con.query(consulta, function(error, rows) {
