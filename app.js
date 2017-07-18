@@ -69,6 +69,10 @@ connection.connect(function(error) {
   }
 }); 
 
+
+
+connection.query('TRUNCATE TABLE ubicaciones_transportistas');
+
 app.use('/', routes);
 app.use('/users', users);
 require('./routes/api')(app, connection);
