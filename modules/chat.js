@@ -5,6 +5,7 @@ module.exports = function(socket, connection) {
 		socket.broadcast.emit("entrega_mensaje", msg);
 		var obj = JSON.parse(msg);
 		delete obj.sender;
+		delete obj.socket;
 		queries.insert(connection, obj, `chat`);
 	})
 }

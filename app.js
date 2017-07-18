@@ -69,8 +69,6 @@ connection.connect(function(error) {
   }
 }); 
 
-
-
 connection.query('TRUNCATE TABLE ubicaciones_transportistas');
 
 app.use('/', routes);
