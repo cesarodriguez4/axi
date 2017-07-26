@@ -71,6 +71,8 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							return console.log(error);
 						}
 						if(rows.length > 0 ) {
+							console.log('tam -> ');
+							console.log(rows);
 							var res_transportista = {
 								id_pasajero: id,
 								id_transportista: menorId || 'error', 
