@@ -112,7 +112,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 							console.log(error);
 						} else {
 							console.log('resultado de inner join');
-							if (typeof rows[0].nombre === undefined) {
+							if (rows[0]) {
 						    console.log('gualberto');
 							var res_pasajero = {
 								id_pasajero: id, 
