@@ -104,7 +104,7 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 					
 					//Se cambia el status al transportista
 					queries.updateWhere(con, 'transportistas', 'status', '0', 'id', menorId );
-					var queryTrans = "SELECT * FROM `transportistas` INNER JOIN `ubicaciones_transportistas` on transportistas.id = ubicaciones_transportistas.id WHERE transportistas.id =" + menorId;
+					var queryTrans = "SELECT * FROM `usuarios` INNER JOIN `ubicaciones_transportistas` on usuarios.id = ubicaciones_transportistas.id WHERE usuarios.id = '" + menorId + "'";
 					console.log(queryTrans);
 					con.query(queryTrans, function(error, rows) {
 						if (error) {
