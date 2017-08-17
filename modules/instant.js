@@ -88,10 +88,9 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 								foto_perfil: rows[0].foto_perfil
 							}
 							socket.broadcast.emit("nueva-ondemand", res_transportista);
+							console.log('totona');
 							console.log(res_transportista);
-
 							//Se agrega al historial a la carrera
-
 							var cancelaJson = {
 								id_pasajero: id, 
 								id_transportista: menorId
