@@ -189,7 +189,7 @@ function lista(res,con, id, lon, lat) {
 		 el resto de datos del transportista como fotos, nombre, etc) 
 	*/
 
-	var query = "SELECT * from `ubicaciones_transportistas` inner join `transportistas` on transportistas.id = ubicaciones_transportistas.id";
+	var query = "SELECT * from `ubicaciones_transportistas` inner join `usuarios` on usuarios.id = ubicaciones_transportistas.id";
 	console.log(query);
 	con.query(query, function(error, result) {
 		if (error) {
