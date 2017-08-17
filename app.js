@@ -156,6 +156,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('solicitud-instantanea', function(obj) {
+    console.log(obj);
     obj = JSON.parse(obj);
     if (obj) {
       var id = obj.id_usuario;
