@@ -141,6 +141,7 @@ io.on('connection', function(socket) {
   socket.on('solicitud-aceptada', function(data) {
       var obj = JSON.parse(data);
       console.log('solicitud-aceptada');
+      console.log(obj);
       socket.broadcast.emit('aceptada-cliente', {idSolicitud: obj.id_solicitud, id_pasajero: obj.id_pasajero, socket: 'aceptada-cliente' } );
   });
 
