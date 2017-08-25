@@ -159,7 +159,26 @@ io.on('connection', function(socket) {
   socket.on('solicitud-instantanea', function(obj) {
     console.log(obj);
     obj = JSON.parse(obj);
-    if (obj) {
+
+    if (obj.id_pasajero) {
+      console.log('amiga');
+      var res_transportista = {
+        id_pasajero: obj.id_pasajero,
+        id_transportista: obj.id_transportista, 
+        origen: obj.origen, 
+        destino, 
+        telefono: obj.telefono, 
+        nombre: obj.nombre, 
+        socket: 'nueva-ondemand', 
+        lon:obj.lon, 
+        lat:obj.lat, 
+        lonFinal:obj.lonFinal, 
+        latFinal:obj.latFinal, 
+        foto_perfil: obj.foto_perfil
+      }
+      socket.broadcast.emit("nueva-ondemand", res_transportista);
+    } else {
+      console.log('mia');
       var id = obj.id_usuario;
       var lon = Number(obj.lon);
       var lat = Number(obj.lat);
@@ -167,10 +186,7 @@ io.on('connection', function(socket) {
       var destino = obj.destino;
       var lonFinal = Number(obj.lonFinal);
       var latFinal = Number(obj.latFinal);
-
       viantti.instantaneo(connection, socket ,'ubicaciones_transportistas', id, lon, lat, origen, destino, lonFinal, latFinal);
-    } else {
-      console.log('No ha enviado ningun objeto');
     }
   });
 
