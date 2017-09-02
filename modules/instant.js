@@ -136,9 +136,10 @@ function instantaneo(con, socket, table, id, lon, lat, origen, destino, lonFinal
 								mLat:rows[0].lat, 
 								mLng:rows[0].lon
 							}
+							console.log('y repartir el camino');
 							console.log(res_pasajero);
 							//res_pasajero = JSON.stringify(res_pasajero);
-							socket.broadcast.emit("info-ondemand", res_pasajero);
+							socket.emit("info-ondemand", res_pasajero);
 						}
 					  }
 					});
