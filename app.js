@@ -159,7 +159,6 @@ io.on('connection', function(socket) {
   socket.on('solicitud-instantanea', function(obj) {
     console.log(obj);
     obj = JSON.parse(obj);
-
     if (obj.id_pasajero) {
       console.log('amiga');
       var res_transportista = {
