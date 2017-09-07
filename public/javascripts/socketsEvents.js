@@ -20,6 +20,11 @@ function aceptar() {
 	socket.emit("solicitud-aceptada", objeto);
 }
 
+socket.on("aceptada-cliente", data => {
+  alert('aceptada-cliente');
+  console.log(data);
+});
+
 socket.on("solicitudes-a-taxistas", function(data){
 	console.log(data);
 });
